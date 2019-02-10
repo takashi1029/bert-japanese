@@ -248,6 +248,10 @@ class LivedoorProcessor(DataProcessor):
             InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
     return examples
 
+class TweetProcessor(LivedoorProcessor):
+
+  def get_labels(self):
+    return ["0", "1", "2", "3", "4"]
 
 def convert_single_example(ex_index, example, label_list, max_seq_length,
                            tokenizer):
@@ -660,6 +664,7 @@ def main(_):
 
   processors = {
       "livedoor": LivedoorProcessor,
+      "tweet": TweetProcessor
   }
 
   tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
